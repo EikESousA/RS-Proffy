@@ -1,31 +1,34 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
-import logo from "../../assets/images/logo.svg";
-import backIcon from "../../assets/images/icons/back.svg";
+import logoImg from '../../assets/images/logo.svg';
+import backIcon from '../../assets/images/icons/back.svg';
 
-import { Container } from "./styles";
+import './styles.css';
 
-interface Props {
-  title: string;
+interface PageHeaderProps {
+    title: string;
+    description?: string;
 }
 
-const PageHeader: React.FC<Props> = ({ title, children }) => (
-  <Container>
-    <div className="top-bar-container">
-      <Link to="/">
-        <img src={backIcon} alt="Voltar" />
-      </Link>
+const PageHeader: React.FC<PageHeaderProps> = (props) => {
+    return (
+        <header className="page-header">
+            <div className="top-bar-container">
+                <Link to="/">
+                    <img src={backIcon} alt="Voltar" />
+                </Link>
+                <img src={logoImg} alt="Proffy" />
+            </div>
 
-      <img src={logo} alt="Proffy" />
-    </div>
-
-    <div className="header-content">
-      <strong>{title}</strong>
-
-      {children}
-    </div>
-  </Container>
-);
+            <div className="header-content">
+                <strong>{props.title}</strong>
+                {props.description && <p>{props.description}</p>}
+                
+                {props.children}
+            </div>
+        </header>
+    );
+}
 
 export default PageHeader;
